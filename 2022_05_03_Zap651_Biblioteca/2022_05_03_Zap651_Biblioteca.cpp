@@ -4,17 +4,23 @@
 #include <iostream>
 #include <Windows.h>
 #include <string>
+#include <stdlib.h>
+#include <chrono>
+#include <thread>
+
 
 int main()
 {
     int posicion = 0, year[5], juego;
-    std::string titulo[5], desarrolladora[5], eleccion;
+    std::string titulo[5], desarrolladora[5], eleccion, intro = "Bienvenido. Para registrar sus juegos, favor de seguir las instrucciones.\nSolo puede registrar 5 juegos.\nPresione enter para continuar.";
 
-    Sleep(2000);
-    std::cout << "Bienvenido. Para registrar sus juegos, favor de seguir las instrucciones.\n";
-    Sleep(2000);
-    std::cout << "Solo puede registrar 5 juegos.\n";
-    std::cout << "-----------------------------------------------------------------" << std::endl;
+    for (const auto c : intro)
+    {
+        std:: cout << c << std::flush;
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+    }
+    std::cin.ignore();
+    system("CLS");
 
     while (true) {
         for (int contador = 1; contador < 6; contador++) {
@@ -30,17 +36,23 @@ int main()
             std::cout << "Juego No. " << contador << " registrado correctamente." << std::endl;
             std::cout << "-----------------------------------------------------------------" << std::endl;
             posicion++;
+            Sleep(2000);
+            system("CLS");
         }
         Sleep(2000);
         std::cout << "Todos los juegos han sido registrados correctamente. " << std::endl;
         Sleep(2000);
         std::cout << "Desea comprobar sus datos? Escriba si o no, por favor. " << std::endl;
         std::cin >> eleccion;
+        Sleep(2000);
+        system("CLS");
         if (eleccion == "Si" || eleccion == "si") {
             while (eleccion == "Si" || eleccion == "si") {
-                std::cout << "Seleccione el juego que desea comprobar. " << std::endl;
+                std::cout << "Seleccione el juego que desea comprobar. Del 1 al 5. " << std::endl;
                 std::cin >> juego;
                 juego = juego - 1;
+                Sleep(2000);
+                system("CLS");
                 std::cout << "-----------------------------------------------------------------" << std::endl;
                 std::cout << "" << std::endl;
                 std::cout << "Nombre: " << titulo[juego] << std::endl;
@@ -52,21 +64,14 @@ int main()
                 std::cout << "Desea comprobar otro juego? " << std::endl;
                 std::cin >> eleccion;
                 std::cout << "-----------------------------------------------------------------" << std::endl;
+                Sleep(2000);
+                system("CLS");
                 if (eleccion == "Si" || eleccion == "si") {
                     continue;
                 }
                 else
                 {
-                    std::cout << "Desea registrar otros 5 juegos? " << std::endl;
-                    std::cin >> eleccion;
-                    std::cout << "-----------------------------------------------------------------" << std::endl;
-                    if (eleccion == "Si" || eleccion == "si") {
-                        continue;
-                    }
-                    else
-                    {
-                        exit(EXIT_SUCCESS);
-                    }
+                    exit(EXIT_SUCCESS);
                 }
             }
         }
